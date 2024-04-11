@@ -22,7 +22,7 @@
 ### Build infrastructure with docker-compose file
 1. Open Docker Desktop and verify it works properly
 2. Clone this repository into your desired folder and run the following commands in the root directory
-3. Run the docker compose file to build the Wordpress website, associated MySQL database and a backup container:
+3. Run the ``docker-compose.yml`` file to build the Wordpress website, associated MySQL database and a backup container:
 ``` 
 docker compose up
 ```
