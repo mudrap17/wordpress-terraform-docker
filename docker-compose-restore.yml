@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+
+  mysql-container-new:
+    # We use a mysql image for database
+    container_name: mysql-container-new
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - 8888:3306
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+    networks:
+      - wordpress-network-new
+
+  wordpress-new:
+    depends_on:
+      - mysql-container-new
+    image: wordpress:latest
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    env_file: .env
+    environment:
+      WORDPRESS_DB_HOST: mysql-container-new # use the same name as database service
+      WORDPRESS_DB_NAME: '${MYSQL_DATABASE}'
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+    networks:
+      - wordpress-network-new
+
+networks:
+  wordpress-network-new:
+    driver: bridge

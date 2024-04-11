@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+
+  mysql-container:
+    # We use a mysql image for database
+    container_name: mysql-container
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+    networks:
+      - wordpress-network
+
+  wordpress:
+    depends_on:
+      - mysql-container
+    image: wordpress:latest
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    env_file: .env
+    environment:
+      WORDPRESS_DB_HOST: mysql-container:3306 # use the same name as database service
+      WORDPRESS_DB_NAME: '${MYSQL_DATABASE}'
+      WORDPRESS_DB_USER: '${MYSQL_USER}'
+      WORDPRESS_DB_PASSWORD: '${MYSQL_PASSWORD}'
+    networks:
+      - wordpress-network
+    
+  backup:
+    depends_on:
+      - mysql-container
+    build:
+      context: .
+      dockerfile: Dockerfile.backup
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_HOST: mysql-container:3306 # use the same name as database service
+      BACKUP_DIR: '${BACKUP_DIR}'
+    volumes:
+      - ./backup:/backup
+    networks:
+      - wordpress-network
+
+networks:
+  wordpress-network:
+    driver: bridge
