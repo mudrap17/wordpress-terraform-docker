@@ -29,6 +29,7 @@ http://localhost:8000
 ```
 4. Validate restored backup with new Wordpress website hosted at:
 ```
+http://localhost:8080/
 ```
 
 
