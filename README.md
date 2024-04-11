@@ -26,6 +26,10 @@
 ``` 
 docker compose up
 ```
+4. To stop the containers, run this command:
+```
+docker compose down
+```
 
 ### For testing the backup
 1. Edit ``main.tf`` file at line 73 to add absolute path for your backup folder:
@@ -37,7 +41,7 @@ docker compose up
 ```
 </br>
 
-2. Spin up a terraform environment, which includes the Wordpress website, MySQL database and a backup container (answer yes when prompted to confirm tasks):
+2. Spin up a terraform environment, which includes the Wordpress website, MySQL database and a backup container (answer yes when prompted to approve tasks):
 ```
 terraform init
 terraform plan
@@ -67,4 +71,7 @@ backup/backup_timestamp.sql
 ```
 http://localhost:8080/
 ```
-
+7. To stop the terraform infrastructure, run this command:
+```
+terraform destroy
+```
