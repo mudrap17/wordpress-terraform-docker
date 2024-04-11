@@ -16,12 +16,12 @@ provider "docker" {
 
 # Define Docker network
 resource "docker_network" "wordpress_network" {
-  name = "wordpress_network"
+  name = "wordpress_network_terraform"
 }
 
 # Define MySQL container
 resource "docker_container" "mysql" {
-  name  = "mysql-container"
+  name  = "mysql-container-terraform"
   image = "mysql:latest"
   env   = [
     "MYSQL_ROOT_PASSWORD=root_password",
@@ -40,10 +40,10 @@ resource "docker_container" "mysql" {
 
 # Define WordPress container
 resource "docker_container" "wordpress" {
-  name  = "wordpress_container"
+  name  = "wordpress_container_terraform"
   image = "wordpress:latest"
   env   = [
-    "WORDPRESS_DB_HOST=mysql-container",
+    "WORDPRESS_DB_HOST=mysql-container-terraform",
     "WORDPRESS_DB_USER=wordpress",
     "WORDPRESS_DB_PASSWORD=wordpress_password",
     "WORDPRESS_DB_NAME=wordpress",
@@ -81,7 +81,7 @@ resource "docker_container" "backup" {
     "MYSQL_DATABASE=wordpress",
     "MYSQL_USER=wordpress",
     "MYSQL_PASSWORD=wordpress_password",
-    "MYSQL_HOST=mysql-container",
+    "MYSQL_HOST=mysql-container-terraform",
     "BACKUP_DIR=/backup"
     ]
   volumes {
