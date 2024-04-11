@@ -5,16 +5,16 @@
 docker compose up
 ```
 
-## Build infrastructure with terraform file
+## For testing the backup
+Spin up a terraform environment, which includes the backup container
 ```
-terraform init 
-terraform plan 
-terraform apply 
-terraform destroy 
+terraform init
+terraform plan
+terraform apply
 ```
-
-## Restore environment from backup
-``` 
+Run a new environment from the restored backup in git bash
+```
 ./restore_environment /backup/backup_timestamp.sql
 ```
+
 
