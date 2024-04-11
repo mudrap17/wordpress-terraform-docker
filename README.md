@@ -13,14 +13,14 @@ docker compose up
 ```
 
 ### For testing the backup
-1. Edit ``main.tf`` file at line 73 to add absolute path for your backup folder
+1. Edit ``main.tf`` file at line 73 to add absolute path for your backup folder:
 ```
    variable "backup_host_path" {
     type = string
     default = "path/to/backup" 
    }
 ```
-2. Spin up a terraform environment, which includes the Wordpress website, MySQL database and a backup container
+2. Spin up a terraform environment, which includes the Wordpress website, MySQL database and a backup container:
 ```
 terraform init
 terraform plan
@@ -30,8 +30,7 @@ terraform apply
 ```
 http://localhost:8000
 ```
-4. Run a new environment from the restored backup in git bash
-Use the latest backup file to pass as an argument
+4. Run a new environment from the restored backup in git bash. Use the latest backup file to pass as an argument:
 ```
 ./restore_environment /backup/backup_timestamp.sql
 ```
