@@ -21,6 +21,7 @@ terraform apply
 ```
 2. Make changes(add posts,comments) to the Wordpress website hosted at:
 ```
+http://localhost:8000
 ```
 3. Run a new environment from the restored backup in git bash
 ```
