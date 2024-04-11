@@ -1,12 +1,13 @@
 # wordpress-terraform-docker
 
 ## Objectives
-+ Create a dockerized enviroment with a wordpress website and a database.
++ Create a dockerized enviroment with a Wordpress website and a database.
 + Create a backup container responsible for taking database backups at regular intervals.
 + Create a Terraform script for automated infrastructure building.
 + Create a new enviroment to restore database from backup and validate changes in new Wordpress website.
 
-#### Build infrastructure with docker-compose file
+### Build infrastructure with docker-compose file
+This will build the Wordpress website, a MySQL database and a backup container:
 ``` 
 docker compose up
 ```
