@@ -24,7 +24,7 @@ services:
     image: wordpress:latest
     restart: unless-stopped
     ports:
-      - 8080:80
+      - 8000:80
     env_file: .env
     environment:
       WORDPRESS_DB_HOST: mysql-container:3306 # use the same name as database service
