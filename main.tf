@@ -68,10 +68,6 @@ resource "null_resource" "build_backup_image" {
   }
 }
 
-variable "backup_host_path" {
-  type = string
-  default = "C:/Users/Mudra/Desktop/wordpress-terraform-docker/backup" # Add your backups path
-}
 # Define backup container
 resource "docker_container" "backup" {
   name  = "backup_container"
@@ -86,7 +82,7 @@ resource "docker_container" "backup" {
     ]
   volumes {
     # Host path volume
-    host_path = var.backup_host_path
+    host_path = "${abspath(path.root)}/backup"
     read_only = false
     container_path = "/backup"
   }

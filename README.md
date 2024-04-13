@@ -32,16 +32,9 @@ docker compose down
 ```
 
 ### For testing the backup
-1. Edit ``main.tf`` file at line 73 to add absolute path for your backup folder:
-```
-   variable "backup_host_path" {
-    type = string
-    default = "path/to/backup" 
-   }
-```
-</br>
 
-2. Spin up a terraform environment, which includes the Wordpress website, MySQL database and a backup container (answer yes when prompted to approve tasks):
+
+1. Spin up a terraform environment, which includes the Wordpress website, MySQL database and a backup container (answer yes when prompted to approve tasks):
 ```
 terraform init
 terraform plan
@@ -49,29 +42,29 @@ terraform apply
 ```
 </br>   
 
-3. Make changes(add posts,comments) to the Wordpress website hosted at:
+2. Make changes(add posts,comments) to the Wordpress website hosted at:
 ```
 http://localhost:8000
 ```
 </br> 
 
-4. The database backup is taken every 2 minutes. Check the backup folder in the root directory and identify the backup file with the format: 
+3. The database backup is taken every 2 minutes. Check the backup folder in the root directory and identify the backup file with the format: 
 ```
 backup/backup_timestamp.sql
 ```
 </br> 
 
-5. Run a new environment from the restored backup in git bash. Use the latest backup file to pass as an argument:
+4. Run a new environment from the restored backup in git bash. Use the latest backup file to pass as an argument:
 ```
 ./restore_environment /backup/backup_timestamp.sql
 ```
 </br>
 
-6. Validate restored backup with new Wordpress website hosted at:
+5. Validate restored backup with new Wordpress website hosted at:
 ```
 http://localhost:8080/
 ```
-7. To stop the terraform infrastructure, run this command:
+6. To stop the terraform infrastructure, run this command:
 ```
 terraform destroy
 ```
